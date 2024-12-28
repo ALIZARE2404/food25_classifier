@@ -143,6 +143,46 @@ def download_food101(root:str,
             os.remove("data/food-101.tar.gz")
 
             return (train_path,test_path)
+        
+
+
+def create_food25(root:str):
+    
+    if os.path.isdir(f'{root}/food-101'):
+        # Define paths for original dataset
+        original_dataset_path = 'root/food-101'
+        new_dataset_path = 'root/food-25'
+
+        # List of first 25 categories (adjust this list based on your actual category names)
+        categories = sorted(os.listdir(f'{original_dataset_path}/train'))[:25]
+
+        # Create new directory structure
+        for split in ['train', 'val', 'test']:
+            new_split_path = os.path.join(new_dataset_path, split)
+            os.makedirs(new_split_path, exist_ok=True)  # Create split directory if it doesn't exist
+
+            for category in categories:
+                # Define source and destination paths
+                src_category_path = os.path.join(original_dataset_path, split, category)
+                dst_category_path = os.path.join(new_split_path, category)
+
+                # Copy the category directory to the new location
+                if os.path.exists(src_category_path):
+                    shutil.copytree(src_category_path, dst_category_path)
+                    print(f"Copied {src_category_path} to {dst_category_path}")
+                else:
+                    print(f"Category {src_category_path} does not exist.")
+
+        print("New dataset created with first 25 categories.")
+        return('root/food-25/train','root/food-25/val','root/food-25/test')
+        
+    else:
+        print('please download food101 dataset with download_food101 function.')
+
+
+
+
+    
 
 
 
