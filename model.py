@@ -1,7 +1,25 @@
 import torch
 from pathlib import Path
+import torch.nn as nn
+import random
 
+def random_fine_tuning(model:nn.Module,
+                  freeze_percentage:float
+                  ):
+    
+        params = list(model.parameters())
 
+        # Calculate the number of parameters to freeze
+        num_params_to_freeze = int(len(params) * freeze_percentage)
+
+        # Randomly select parameters to freeze
+        params_to_freeze = random.sample(params, num_params_to_freeze)
+
+        # Freeze selected parameters
+        for param in params_to_freeze:
+            param.requires_grad = False
+    
+        return model
 
 
 def save_model(model: torch.nn.Module,
