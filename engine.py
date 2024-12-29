@@ -223,7 +223,9 @@ def train(model: torch.nn.Module,
           optimizer: torch.optim.Optimizer,
           loss_fn: torch.nn.Module,
           epochs: int,
-          device: torch.device) -> Dict[str, List]:
+          device: torch.device,
+          model_name:str,
+          model_saving_dir:str) -> Dict[str, List]:
   """Trains and tests a PyTorch model.
 
   Passes a target PyTorch models through train_step() and test_step()
@@ -276,8 +278,8 @@ def train(model: torch.nn.Module,
 
       if (epoch)%10==0:
         save_model(model=model,
-                   target_dir="models",
-                   model_name=f"{epoch+1}_Food101_EfficientNetV2_tr_learning.pth")
+                   target_dir=model_saving_dir,
+                   model_name=model_name)
 
       # Print out what's happening
       print(
