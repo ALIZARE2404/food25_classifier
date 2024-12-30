@@ -13,7 +13,11 @@ if os.path.isdir('data/food-101'):
 else:
     food_101_train_path,food_101_val_path,food_101_test_path=download_food101(root='data')
 #create food25
-train_path,val_path,test_path=create_food25(root='data')
+if os.path.isdir('data/food-25'):
+    print("food-25 dataset exists")
+    train_path,val_path,test_path='data/food-25/train','data/food-25/val','data/food-25/test'
+else:
+    train_path,val_path,test_path=create_food25(root='data')
 
 #define train and test transformer
 train_transform=transforms.Compose([
