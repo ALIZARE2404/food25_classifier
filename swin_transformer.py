@@ -49,7 +49,7 @@ loss_fn=nn.CrossEntropyLoss()
 optimizer=Adam(params=model.parameters(),lr=0.001)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+model.to(device=device)
 #path to save model and its results
 save_path='swin_b_food25_v1'
 results=engine.train(model=model,
