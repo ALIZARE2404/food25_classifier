@@ -176,7 +176,7 @@ def create_food25(root:str):
                     print(f"Category {src_category_path} does not exist.")
 
         print("New dataset created with first 25 categories.")
-        return('root/food-25/train','root/food-25/val','root/food-25/test')
+        return(f'{root}/food-25/train',f'{root}food-25/val',f'{root}food-25/test')
         
     else:
         print('please download food101 dataset with download_food101 function.')
