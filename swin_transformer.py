@@ -59,7 +59,7 @@ results=engine.train(model=model,
                      loss_fn=loss_fn,
                      epochs=60,
                      device=device,
-                     model_name="swin_b_food25_v1",
+                     model_name="swin_b_food25_v1.pth",
                      model_saving_dir=save_path)
 
 test_results=engine.eval_model(model=model,
