@@ -21,14 +21,14 @@ else:
 
 #define train and test transformer
 train_transform=transforms.Compose([
-    transforms.Resize((272, 272),interpolation=transforms.InterpolationMode.BICUBIC),
-    transforms.CenterCrop(size=(256,)),
+    transforms.Resize((238, 238),interpolation=transforms.InterpolationMode.BICUBIC),
+    transforms.CenterCrop(size=(224,)),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
 
 test_transform=transforms.Compose([
-    transforms.Resize((256, 256),interpolation=transforms.InterpolationMode.BICUBIC),
+    transforms.Resize((224,224),interpolation=transforms.InterpolationMode.BICUBIC),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
@@ -38,11 +38,11 @@ train_dataloader,val_dataloader,test_dataloader,class_names=create_dataloader(tr
                                                                               test_path=test_path,
                                                                               train_transform=train_transform,
                                                                               test_transform=test_transform,
-                                                                              batch_size=16,
+                                                                              batch_size=48,
                                                                               num_workers=os.cpu_count())
 
 #define the model
-model=models.swin_v2_b(weights='DEFAULT')
+model=models.swin_b(weights='DEFAULT')
 model.head=nn.Linear(in_features=1024,out_features=25,bias=True)
 
 loss_fn=nn.CrossEntropyLoss()
