@@ -266,9 +266,16 @@ def walk_through_dir(dir_path):
     
 
 def save_result(data_dict,
+                result_save_dir:str,
                 result_name:str):
     serializable_dict1={k: v.tolist() if v.dim() > 0 else v.item() for k, v in data_dict.items()}
-    with open(result_name, "w") as f:
+    if os.path.isdir(result_save_dir):
+        file_path=os.path.join(result_save_dir,result_name)
+    else:
+        os.mkdirs(result_save_dir)
+        file_path=os.path.join(result_save_dir,result_name)
+
+    with open(file_path, "w") as f:
         json.dump(serializable_dict1, f, indent=4)
 
 
