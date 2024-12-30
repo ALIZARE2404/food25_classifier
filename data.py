@@ -150,8 +150,8 @@ def create_food25(root:str):
     
     if os.path.isdir(f'{root}/food-101'):
         # Define paths for original dataset
-        original_dataset_path = 'root/food-101'
-        new_dataset_path = 'root/food-25'
+        original_dataset_path = f'{root}/food-101'
+        new_dataset_path = f'{root}/food-25'
 
         # List of first 25 categories (adjust this list based on your actual category names)
         categories = sorted(os.listdir(f'{original_dataset_path}/train'))[:25]
