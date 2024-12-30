@@ -38,7 +38,7 @@ train_dataloader,val_dataloader,test_dataloader,class_names=create_dataloader(tr
                                                                               test_path=test_path,
                                                                               train_transform=train_transform,
                                                                               test_transform=test_transform,
-                                                                              batch_size=64,
+                                                                              batch_size=48,
                                                                               num_workers=os.cpu_count())
 
 #define the model
