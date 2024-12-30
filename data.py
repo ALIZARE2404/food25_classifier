@@ -8,7 +8,6 @@ from pathlib import Path
 import shutil
 
 def download_food101(root:str,
-                     transform:transforms.Compose,
                      val_split:bool=True,
                      val_pecentage:int=10):
     """download food 101 dataset and create train val and test directory.
@@ -26,8 +25,8 @@ def download_food101(root:str,
     """
     
     
-    food101_train = Food101(root=root, split='train', transform=transform, download=True)
-    food101_test = Food101(root=root, split='test', transform=transform, download=True)
+    food101_train = Food101(root=root, split='train', download=True)
+    food101_test = Food101(root=root, split='test', download=True)
     food_classes=food101_train.classes
 
     if val_split:
