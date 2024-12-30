@@ -6,6 +6,7 @@ from torch.utils.data import DataLoader
 import os
 from pathlib import Path
 import shutil
+import json
 
 def download_food101(root:str,
                      val_split:bool=True,
@@ -263,6 +264,13 @@ def walk_through_dir(dir_path):
   for dirpath, dirnames, filenames in os.walk(dir_path):
     print(f"There are {len(dirnames)} directories and {len(filenames)} images in '{dirpath}'.")
     
+
+def save_result(data_dict,
+                result_name:str):
+    serializable_dict1={k: v.tolist() if v.dim() > 0 else v.item() for k, v in data_dict.items()}
+    with open(result_name, "w") as f:
+        json.dump(serializable_dict1, f, indent=4)
+
 
 
 
