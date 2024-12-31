@@ -219,7 +219,7 @@ Turns a target PyTorch model to "eval" mode and then performs
 
 def train(model: torch.nn.Module,
           train_dataloader: torch.utils.data.DataLoader,
-          test_dataloader: torch.utils.data.DataLoader,
+          val_dataloader: torch.utils.data.DataLoader,
           optimizer: torch.optim.Optimizer,
           loss_fn: torch.nn.Module,
           epochs: int,
@@ -249,13 +249,13 @@ def train(model: torch.nn.Module,
     each epoch.
     In the form: {train_loss: [...],
                   train_acc: [...],
-                  test_loss: [...],
-                  test_acc: [...]}
+                  val_loss: [...],
+                  val_acc: [...]}
     For example if training for epochs=2:
                  {train_loss: [2.0616, 1.0537],
                   train_acc: [0.3945, 0.3945],
-                  test_loss: [1.2641, 1.5706],
-                  test_acc: [0.3400, 0.2973]}
+                  val_loss: [1.2641, 1.5706],
+                  val_acc: [0.3400, 0.2973]}
   """
   # Create empty results dictionary
   results = {"train_loss": [],
@@ -272,7 +272,7 @@ def train(model: torch.nn.Module,
                                           optimizer=optimizer,
                                           device=device)
       val_loss, val_acc = val_step(model=model,
-          dataloader=test_dataloader,
+          dataloader=val_dataloader,
           loss_fn=loss_fn,
           device=device)
 
