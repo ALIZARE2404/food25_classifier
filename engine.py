@@ -260,8 +260,8 @@ def train(model: torch.nn.Module,
   # Create empty results dictionary
   results = {"train_loss": [],
       "train_acc": [],
-      "test_loss": [],
-      "test_acc": []
+      "val_loss": [],
+      "val_acc": []
   }
 
   # Loop through training and testing steps for a number of epochs
@@ -271,7 +271,7 @@ def train(model: torch.nn.Module,
                                           loss_fn=loss_fn,
                                           optimizer=optimizer,
                                           device=device)
-      test_loss, test_acc = val_step(model=model,
+      val_loss, val_acc = val_step(model=model,
           dataloader=test_dataloader,
           loss_fn=loss_fn,
           device=device)
@@ -279,22 +279,22 @@ def train(model: torch.nn.Module,
       if (epoch)%10==0:
         save_model(model=model,
                    target_dir=model_saving_dir,
-                   model_name=model_name)
+                   model_name=f"{epoch}_{model_name}")
 
       # Print out what's happening
       print(
           f"Epoch: {epoch+1} | "
           f"train_loss: {train_loss:.4f} | "
           f"train_acc: {train_acc:.4f} | "
-          f"test_loss: {test_loss:.4f} | "
-          f"test_acc: {test_acc:.4f}"
+          f"test_loss: {val_loss:.4f} | "
+          f"test_acc: {val_acc:.4f}"
       )
 
       # Update results dictionary
       results["train_loss"].append(train_loss)
       results["train_acc"].append(train_acc)
-      results["test_loss"].append(test_loss)
-      results["test_acc"].append(test_acc)
+      results["test_loss"].append(val_loss)
+      results["test_acc"].append(val_acc)
 
   # Return the filled results at the end of the epochs
   return results
