@@ -155,7 +155,7 @@ Turns a target PyTorch model to "eval" mode and then performs
            "test_confusion_matrix":[]}
 
   """
-  
+  test_acc,test_loss=0,0
   model.eval()
 
   # Setup test loss and test accuracy values
