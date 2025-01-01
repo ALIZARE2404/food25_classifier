@@ -155,7 +155,7 @@ Turns a target PyTorch model to "eval" mode and then performs
            "test_confusion_matrix":[]}
 
   """
-  test_acc,test_loss=0,0
+  test_acc,test_loss=0,0  
   model.eval()
 
   # Setup test loss and test accuracy values
@@ -166,10 +166,10 @@ Turns a target PyTorch model to "eval" mode and then performs
            "test_f1_score":[],
            "test_confusion_matrix":[]}
 
-  precision_metric = Precision(num_classes=num_classes,task="multiclass")
-  recall_metric = Recall(num_classes=num_classes,task="multiclass")
-  f1_score_metric = F1Score(num_classes=num_classes,task="multiclass")
-  confusion_matrix = ConfusionMatrix(num_classes=num_classes,task="multiclass")
+  precision_metric = Precision(num_classes=num_classes,task="multiclass").to(device)
+  recall_metric = Recall(num_classes=num_classes,task="multiclass").to(device)
+  f1_score_metric = F1Score(num_classes=num_classes,task="multiclass").to(device)
+  confusion_matrix = ConfusionMatrix(num_classes=num_classes,task="multiclass").to(device)
 
 
   # Turn on inference context manager
